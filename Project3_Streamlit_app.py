@@ -1,7 +1,5 @@
-import pandas as pd
-import streamlit as st
-import pickle
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 # <style>
@@ -57,3 +55,5 @@ if add_selectbox == 'Cover':
     
     st.subheader('A new solution that can change the movie industry')
 >>>>>>> a5396416387ee0faec02d7412bc179720906b9c2
+=======
+>>>>>>> d457305506164a12bcf65834d868bbfa3db42f8e

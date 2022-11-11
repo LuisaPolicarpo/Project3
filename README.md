@@ -1,5 +1,20 @@
 # Project3
 
+Project3_Marta_EDA_Final - EDA for tittle basics, akas and title rattings and releatad KPI's.
+
+Rotten - This is the code for the word cloud to be used in the streamlit application.
+
+luisa_p- In this code we also explore the following KPI's: top actor, top actrisses, top writers and directs.
+
+project3_geral - The file for the join tables we will use in the model.
+
+Project3_Recomendation_system - The model
+
+Project3_Streamlit_app - Code for the streamlit application.
+
+
+
+
 
 ### Data Analysis
 - Total movies analyzed -> +imbd.sum()
@@ -28,3 +43,6 @@ Datasets: https://datasets.imdbws.com/
 Reviews: https://www.kaggle.com/datasets/stefanoleone992/rotten-tomatoes-movies-and-critic-reviews-dataset
 
 Other: https://blogs.gartner.com/martin-kihn/how-to-build-a-recommender-system-in-python/
+
+
+

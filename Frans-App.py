@@ -17,52 +17,60 @@ from string import punctuation
 from wordcloud import WordCloud
 import pickle
 from PIL import Image
+import requests
+import streamlit_nested_layout
 
 ###Import Data
 reviews_wc = pd.read_pickle("pickles/review_final-wc_p.pkl")
 
 ### Define columns:
-col1, col2, col3 = st.columns(3)
+st.set_page_config(page_title=None, page_icon=None, layout="wide", menu_items=None)
+col1, col2, col3 = st.columns([2,1,1])
 
 with col1:
-    genre_input = st.selectbox('Type a genre: ')
-    st.write('This is a re the most recurring words to describe ', genre_input, ' genre')
-    
-    ### Word Cloud for Genre with str contains
-    select_genre = str(input('Type :'))
-    text03 = reviews_wc[reviews_wc['genres'].str.contains(genre_input, na=False)]['review_content']
-    text03 = str(text03)
-    text03 = re.sub(r"\d+","",text03)
-    tokenizer = nltk.RegexpTokenizer(r"\w+")
-    nopunc = tokenizer.tokenize(text03)
-    words03=" ".join(nopunc)
-    words03= nltk.word_tokenize(words03.lower())
-    x3 = re.findall("[0-9]+",text03)
-    stop_words = set(stopwords.words('english'))
-    stop_words |= set(x3) #add the list with all the numbers in the string to the list of stopwords
-    stop_words.update({'n', 'name', 'review_content','length', 'dtype', 'object','movie','film','films','th','one','like','sharknado','b',genre_input.lower()})
-    words = words03
+    title = st.text_input('Type the title and press Enter')
+if title:
+        try: 
+            url = f"https://www.omdbapi.com/?t={title}&apikey=38187759"
+            re = requests.get(url)
+            re = re.json()
+            col1, col2, = st.columns([1,1])
+            with col1:
+                    st.image(re['Poster'])
+            with col2:
+                    st.subheader(re['Title'])
+                    st.caption(f"Gender:{re['Genre']} Year: {re['Year']} ")
+                    st.write (re['Plot'])
+                    st.text(f"Rating: {re['imdbRating']}")
+                    st.progress(float(re['imdbRating'])/10)
+        except:
+                title = False
+                st.error('No movie with that title')
+                contact_form = """
+    <form action="https://formsubmit.co/inovmovie@gmail.com" method="POST">
+     <input type="text" name="Suggestion" placeholder="Movie suggestion" required>
+     <input type="text name="Name" placeholder="Your name" required>
+     <button type="submit">Send</button>
+</form>
+"""
+                st.markdown (contact_form, unsafe_allow_html=True)
 
-    sentence04 = [w for w in words if not w in stop_words]
-
-    wordcloud = WordCloud(width=200, height=200,background_color='white', max_font_size=200, min_font_size=10, max_words=10)
-
-    sentence1 = sentence04
-    freq = nltk.FreqDist(sentence1)
-
-    wordcloud.generate_from_frequencies(freq)
-
-    plt.figure()
-    plt.imshow(wordcloud, interpolation="bilinear")
-    plt.axis("off")
-    plt.margins(x=0, y=0)
-    plt.show()
-    
 with col2:
-    ('')
+    st.markdown('hola')
 
 with col3:
-    selected_movie_name = st.selectbox(
-    'How would you like to be contacted?',
-    reviews_wc['movie_title'].values)
-      
+    st.title('hola')
+
+outer_cols = st.columns([1, 1])
+
+with outer_cols[0]:
+    st.markdown('## Column 1')
+    st.selectbox('selectbox', [1,2,3], key='sel1')
+    
+    inner_cols = st.columns([1, 1])
+    with inner_cols[0]:
+        st.markdown('Nested Column 1')
+        st.selectbox('selectbox', [1,2,3], key='sel2')
+    with inner_cols[1]:
+        st.markdown('Nested Column 2')
+        st.selectbox('selectbox', [1,2,3], key='sel3')

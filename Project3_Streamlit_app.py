@@ -48,12 +48,12 @@ add_bg_from_local('./Picture1.jpg')
 col1, col2, col3 = st.columns(3)
 
 with col1:
-    genre_input = 'Action'
-    # genre_input = st.text_input('Type a genre: ')
-    # st.write('This is a re the most recurring words to describe ', genre_input, ' genre')
+    genre_input = st.selectbox('Type a genre: ')
+    st.write('This is a re the most recurring words to describe ', genre_input, ' genre')
+    
     ### Word Cloud for Genre with str contains
     select_genre = str(input('Type :'))
-    text03 = reviews_wc[reviews_wc['genres'].str.contains(genre_input, na=False)]['review_content'] #'''Hola, como estas 19845''' groupby(['first_genre']
+    text03 = reviews_wc[reviews_wc['genres'].str.contains(genre_input, na=False)]['review_content']
     text03 = str(text03)
     text03 = re.sub(r"\d+","",text03)
     tokenizer = nltk.RegexpTokenizer(r"\w+")
@@ -68,7 +68,7 @@ with col1:
 
     sentence04 = [w for w in words if not w in stop_words]
 
-    wordcloud = WordCloud(width=400, height=400,background_color='white', max_font_size=200, min_font_size=10)
+    wordcloud = WordCloud(width=200, height=200,background_color='white', max_font_size=200, min_font_size=10, max_words=10)
 
     sentence1 = sentence04
     freq = nltk.FreqDist(sentence1)

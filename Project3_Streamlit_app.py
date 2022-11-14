@@ -48,7 +48,7 @@ add_bg_from_local('./Picture1.jpg')
 col1, col2, col3 = st.columns(3)
 
 with col1:
-    genre_input = st.selectbox('Type a genre: ')
+    genre_input = st.text_input('Type a genre: ')
     st.write('This is a re the most recurring words to describe ', genre_input, ' genre')
     
     ### Word Cloud for Genre with str contains

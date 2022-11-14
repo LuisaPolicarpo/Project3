@@ -115,11 +115,7 @@ with col2:
     
 with col3:
     ('')
-    
     # session.options = st.multiselect(label="Select Movies", options=movies)
-
-
-
     
 #     session.slider_count = st.slider(label="movie_count", min_value=5, max_value=50)
 
@@ -155,4 +151,3 @@ with col3:
     # "Type or select a movie from the dropdown",
     #  df_inovmovie['PrimaryTitle'].values
     # )
-      

@@ -1,2 +1,4 @@
 
 *.pickle
+pickles/reviews_p.pkl
+*.pkl

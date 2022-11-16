@@ -64,7 +64,6 @@ with outer_cols[0]:
                             st.subheader(re['Title'])
                             st.write (re['Plot'])
                             st.text(f"Rating: {re['imdbRating']}")
-                            st.progress(float(re['imdbRating'])/10)
                         
                         inner_cols = st.columns([1,2])
                         with inner_cols[0]:
@@ -73,7 +72,6 @@ with outer_cols[0]:
                             st.subheader(re['Title'])
                             st.write (re['Plot'])
                             st.text(f"Rating: {re['imdbRating']}")
-                            st.progress(float(re['imdbRating'])/10)
                         
                         inner_cols = st.columns([1,2])
                         with inner_cols[0]:
@@ -82,7 +80,6 @@ with outer_cols[0]:
                             st.subheader(re['Title'])
                             st.write (re['Plot'])
                             st.text(f"Rating: {re['imdbRating']}")
-                            st.progress(float(re['imdbRating'])/10)
 
             except:
                 title = False

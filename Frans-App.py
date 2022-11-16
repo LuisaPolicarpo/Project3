@@ -57,7 +57,7 @@ with outer_cols[0]:
                     st.text(f"Rating: {re['imdbRating']}")
                     st.progress(float(re['imdbRating'])/10)
 
-                        ### Right side of screen    
+                    ### Right side of screen    
                     with outer_cols[0]:
                         st.markdown('')
                         

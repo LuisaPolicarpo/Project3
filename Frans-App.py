@@ -21,7 +21,7 @@ import requests
 import streamlit_nested_layout
 
 ###Import Data
-reviews_wc = pd.read_pickle("pickles/review_final-wc_p.pkl")
+#reviews_wc = pd.read_pickle("pickles/review_final-wc_p.pkl")
 
 ### Define columns:
 st.set_page_config(page_title=None, page_icon="🎥", layout="wide", menu_items=None)
@@ -31,10 +31,10 @@ tab1, tab2, tab3 = st.tabs(["Inov Movie", "Recomendations", "Top Movies"])
 with tab1:
     
    st.header("Inov Movie")
-   st.image(image4, width=1000) 
+   #st.image(image4, width=1000) 
     
 with tab2:    
-outer_cols = st.columns([2,0.5,2])
+ outer_cols = st.columns([2,0.5,2])
 
 ### Left side of screen
 with outer_cols[0]:

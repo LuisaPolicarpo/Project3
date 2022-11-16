@@ -51,7 +51,7 @@ with outer_cols[0]:
                     st.image(re['Poster'])
 
                 with inner_cols[1]:
-                    st.subheader(re['Title'])
+                    st.header(re['Title'])
                     st.caption(f"Gender:{re['Genre']} Year: {re['Year']} ")
                     st.write (re['Plot'])
                     st.text(f"Rating: {re['imdbRating']}")
@@ -66,31 +66,28 @@ with outer_cols[0]:
                         inner_cols = st.columns([1,2])
                         
                         with inner_cols[0]:
-                            st.image(re['Poster'])
+                            st.image(re['Poster'], width=125)
                         
                         with inner_cols[1]:
                             st.subheader(re['Title'])
                             st.write (re['Plot'])
                             st.text(f"Rating: {re['imdbRating']}")
-                            st.progress(float(re['imdbRating'])/10)
-                        
-                        inner_cols = st.columns([1,2])
-                        with inner_cols[0]:
-                            st.image(re['Poster'])
-                        with inner_cols[1]:
-                            st.subheader(re['Title'])
-                            st.write (re['Plot'])
-                            st.text(f"Rating: {re['imdbRating']}")
-                            st.progress(float(re['imdbRating'])/10)
                         
                         inner_cols = st.columns([1,2])
                         with inner_cols[0]:
-                            st.image(re['Poster'], use_column_width='auto')
+                            st.image(re['Poster'], width=125)
                         with inner_cols[1]:
                             st.subheader(re['Title'])
                             st.write (re['Plot'])
                             st.text(f"Rating: {re['imdbRating']}")
-                            st.progress(float(re['imdbRating'])/10)
+                        
+                        inner_cols = st.columns([1,2])
+                        with inner_cols[0]:
+                            st.image(re['Poster'], width=125)
+                        with inner_cols[1]:
+                            st.subheader(re['Title'])
+                            st.write (re['Plot'])
+                            st.text(f"Rating: {re['imdbRating']}")
 
             except:
                 title = False

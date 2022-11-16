@@ -22,7 +22,7 @@ import streamlit_nested_layout
 
 ###Import Data
 #reviews_wc = pd.read_pickle("pickles/review_final-wc_p.pkl")
-
+xxx = pd.read_pickle("/pickles/condition_gi.pickle")
 ### Define columns:
 st.set_page_config(page_title=None, page_icon="🎥", layout="wide", menu_items=None)
 

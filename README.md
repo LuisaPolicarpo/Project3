@@ -38,6 +38,11 @@ pip install streamlit-nested-layout
 
 pip install streamlit_option_menu
 
+pip install threadpoolctl==3.1.0
+
+
+## Movie Recomendation system
+
 - Movie recommendation site 
     - input: movie name,
     - based on start year, title type, weighted average, genre. 

@@ -6,6 +6,7 @@ import re
 import seaborn as sns
 import matplotlib.pyplot as plt
 import matplotlib.ticker as mtick
+from sklearn.neighbors import NearestNeighbors
 from string import punctuation
 import pickle
 from PIL import Image
@@ -36,12 +37,12 @@ with tab2:
 with outer_cols[0]:
     st.markdown('## Movie')
     title = st.text_input('Type the title and press Enter')
+
     if title:
             try: 
                 url = f"https://www.omdbapi.com/?t={title}&apikey=38187759"
                 re = requests.get(url)
                 re = re.json()
-
                 inner_cols = st.columns([1,2])
                 with inner_cols[0]:
                     st.image(re['Poster'])
@@ -60,30 +61,50 @@ with outer_cols[0]:
                     with outer_cols[2]:
                         st.markdown('## Recommendations')
                         inner_cols = st.columns([1,2])
-                        
+                   
                         with inner_cols[0]:
-                            st.image(re['Poster'], width=125)
+                              #Recommednation engine
+                        name = (title)
+                        condition_gi_nn = movies[movies['primaryTitle'].str.contains(name) == False]
+                        name1 = [title]
+                        X1 = condition_gi_nn[['startYear', 'wheighted_IMDB',
+                                                                'Adventure']]
+                        model = NearestNeighbors(n_neighbors=5).fit(X1)
+                        array1, array2 = model.kneighbors(movies.loc[movies['primaryTitle'].isin(name1), ['startYear', 'wheighted_IMDB', 'Adventure']])
+                        list_1 = array1.tolist()
+                        list_2 = array2.tolist()
+                        flat_list1 = list(np.concatenate(list_1).flat)
+                        flat_list2 = list(np.concatenate(list_2).flat)
+                        d = {'Distance': flat_list1,'index': flat_list2}
+                        df12 = pd.DataFrame(d)
+                        dfnl_df12 = pd.merge(condition_gi_nn, df12, how='inner', on=["index", "index"])
+                        final = dfnl_df12.sort_values(by = 'Distance').head(3)
+                        rec1 = final['primaryTitle'].values[0]
+                        url = f"https://www.omdbapi.com/?t={rec1}&apikey=38187759"
+                        re = requests.get(url)
+                        re = re.json()
+                        st.image(re['Poster'], width=125)
                         
-                        with inner_cols[1]:
-                            st.subheader(re['Title'])
-                            st.write (re['Plot'])
-                            st.text(f"Rating: {re['imdbRating']}")
-                        
-                        inner_cols = st.columns([1,2])
-                        with inner_cols[0]:
-                            st.image(re['Poster'], width=125)
-                        with inner_cols[1]:
-                            st.subheader(re['Title'])
-                            st.write (re['Plot'])
-                            st.text(f"Rating: {re['imdbRating']}")
-                        
-                        inner_cols = st.columns([1,2])
-                        with inner_cols[0]:
-                            st.image(re['Poster'], width=125)
-                        with inner_cols[1]:
-                            st.subheader(re['Title'])
-                            st.write (re['Plot'])
-                            st.text(f"Rating: {re['imdbRating']}")
+                            with inner_cols[1]:
+                                st.subheader(re['Title'])
+                                st.write (re['Plot'])
+                                st.text(f"Rating: {re['imdbRating']}")
+                            
+                    inner_cols = st.columns([1,2])
+                    with inner_cols[0]:
+                        st.image(re['Poster'], width=125)
+                    with inner_cols[1]:
+                        st.subheader(re['Title'])
+                        st.write (re['Plot'])
+                        st.text(f"Rating: {re['imdbRating']}")
+                            
+                    inner_cols = st.columns([1,2])
+                    with inner_cols[0]:
+                        st.image(re['Poster'], width=125)
+                    with inner_cols[1]:
+                        st.subheader(re['Title'])
+                        st.write (re['Plot'])
+                        st.text(f"Rating: {re['imdbRating']}")
 
             except:
                 title = False

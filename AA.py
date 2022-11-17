@@ -124,7 +124,6 @@ with tab1:
                                 st.subheader(re['Title'])
                                 st.write (re['Plot'])
                                 st.text(f"Rating: {re['imdbRating']}")
-
     
 with tab2:    
  outer_cols = st.columns([2,0.5,2])

@@ -27,16 +27,44 @@ recommendation_columns = ['startYear', 'wheighted_IMDB',
            'Musical', 'Mystery', 'News', 'Reality-TV', 'Romance', 'Sci-Fi',
            'Short', 'Sport', 'Talk-Show', 'Thriller', 'War', 'Western']
 
-###create df without the movie we want to recommend
-df_inovmovie_nf = df_inovmovie_n[df_inovmovie_n['primaryTitle'].str.contains(name) == False]
 
-###call the model and fit to variables
-model = NearestNeighbors(n_neighbors=5).fit(X1)
+###name test
+# movie_name = 'Pulp Fiction'
 
 ##PRE-PROCESSING
+###clean data
 df_inovmovie = df_inovmovie.drop(['tconst','\\N'], axis = 1)
 df_inovmovie_n = df_inovmovie.dropna(subset=['wheighted_IMDB'])
 
+X1 = df_inovmovie_n[recommendation_columns]
+
+###call the model and fit to variables
+nn_alg = NearestNeighbors(n_neighbors=5).fit(X1)
+
+
+##FUNCTIONS
+
+def rec(name, model):
+    
+        test = df_inovmovie_n.loc[df_inovmovie_n['primaryTitle'].isin([name]), recommendation_columns]
+
+        array1, array2 = model.kneighbors(test)
+
+        list_1 = array1.tolist()
+        list_2 = array2.tolist()
+
+        flat_list1 = list(np.concatenate(list_1).flat)
+        flat_list2 = list(np.concatenate(list_2).flat)
+
+        d = {'Distance': flat_list1,'index': flat_list2}
+        
+        df12 = pd.DataFrame(d)
+        
+        df_inovmovie_nf = df_inovmovie[df_inovmovie['primaryTitle'].str.contains(name) == False]
+
+        dfnl_df12 = pd.merge(df_inovmovie_nf, df12, how='inner', on=["index", "index"])
+        
+        return dfnl_df12.sort_values(by = 'Distance').iloc[1:4]['primaryTitle']
 
 
 # Libraries dividing in groups
@@ -45,3 +73,11 @@ df_inovmovie_n = df_inovmovie.dropna(subset=['wheighted_IMDB'])
 # pre-processing (model_fit)
 
 ##SHOW WITH STREAMLIT
+
+movie_name = st.selectbox(
+    'Select a movie',
+    list(df_inovmovie_n['primaryTitle']))
+
+if movie_name:
+    test = rec(movie_name, nn_alg)
+    st.table(test)

@@ -33,7 +33,9 @@ Project3_Streamlit_app - Code for the streamlit application.
 ### Application
 
 Before running streamlit:
+
 pip install streamlit-nested-layout
+
 pip install streamlit_option_menu
 
 - Movie recommendation site 

@@ -6,15 +6,7 @@ import re
 import seaborn as sns
 import matplotlib.pyplot as plt
 import matplotlib.ticker as mtick
-import re
-import nltk
-import spacy
-from nltk.corpus import stopwords
-from nltk.tokenize import word_tokenize
-from nltk.tokenize import sent_tokenize
-from nltk.stem import SnowballStemmer
 from string import punctuation
-# from wordcloud import WordCloud
 import pickle
 from PIL import Image
 import requests
@@ -24,8 +16,7 @@ from streamlit_option_menu import option_menu
 ###Import Data
 #reviews_wc = pd.read_pickle("pickles/review_final-wc_p.pkl")
 movies = pd.read_pickle("C:\\Users\\frans\\Documents\\GitHub\\Fork-P3\\pickles\\condition_gi.pickle")
-
-
+movies.drop(['tconst','\\N'], axis = 1, inplace = True)
 
 ### Define columns:
 st.set_page_config(page_title="Inov Movie", page_icon="🎥", layout="wide", menu_items=None)

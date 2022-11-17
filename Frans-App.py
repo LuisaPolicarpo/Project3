@@ -6,28 +6,47 @@ import re
 import seaborn as sns
 import matplotlib.pyplot as plt
 import matplotlib.ticker as mtick
-from sklearn.neighbors import NearestNeighbors
+import re
+import nltk
+import spacy
+from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize
+from nltk.tokenize import sent_tokenize
+from nltk.stem import SnowballStemmer
+from sklearn import datasets
+from sklearn.model_selection import train_test_split
+
+from sklearn.decomposition import PCA
+from sklearn.svm import SVC
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.ensemble import RandomForestClassifier
+
+from sklearn.metrics import accuracy_score
 from string import punctuation
+# from wordcloud import WordCloud
 import pickle
 from PIL import Image
 import requests
 import streamlit_nested_layout
 from streamlit_option_menu import option_menu
-
+from sklearn.neighbors import NearestNeighbors
+# server.maxMessageSize
 ###Import Data
 #reviews_wc = pd.read_pickle("pickles/review_final-wc_p.pkl")
-movies = pd.read_pickle("C:\\Users\\frans\\Documents\\GitHub\\Fork-P3\\pickles\\condition_gi.pickle")
-movies.drop(['tconst','\\N'], axis = 1, inplace = True)
-
-### Define columns:
 st.set_page_config(page_title="Inov Movie", page_icon="🎥", layout="wide", menu_items=None)
+movies = pd.read_pickle("C:/Users/luisa/OneDrive/Documentos/GitHub/Project3/condition_gi.pickle")
+# st.table(movies.head())
+movies.drop(['tconst','\\N'], axis = 1, inplace = True)
+st.table(movies.head())
+# input 
+### Define columns:
 
-tab1, tab2, tab3 = st.tabs(["Inov Movie", "Recomendations", "Top Movies"])
+tab2, tab3 = st.tabs([ "Recomendations", "Top Movies"])
 
-with tab1:
+# with tab1:
     
-    st.header("Inov Movie")
-    st.table(movies.head(10))
+#     st.header("Inov Movie")
+#    #st.image(image4, width=1000) 
 
     
 with tab2:    
@@ -37,12 +56,14 @@ with tab2:
 with outer_cols[0]:
     st.markdown('## Movie')
     title = st.text_input('Type the title and press Enter')
-
+    
+    
     if title:
             try: 
                 url = f"https://www.omdbapi.com/?t={title}&apikey=38187759"
                 re = requests.get(url)
                 re = re.json()
+
                 inner_cols = st.columns([1,2])
                 with inner_cols[0]:
                     st.image(re['Poster'])
@@ -61,50 +82,30 @@ with outer_cols[0]:
                     with outer_cols[2]:
                         st.markdown('## Recommendations')
                         inner_cols = st.columns([1,2])
-                   
-                        with inner_cols[0]:
-                              #Recommednation engine
-                        name = (title)
-                        condition_gi_nn = movies[movies['primaryTitle'].str.contains(name) == False]
-                        name1 = [title]
-                        X1 = condition_gi_nn[['startYear', 'wheighted_IMDB',
-                                                                'Adventure']]
-                        model = NearestNeighbors(n_neighbors=5).fit(X1)
-                        array1, array2 = model.kneighbors(movies.loc[movies['primaryTitle'].isin(name1), ['startYear', 'wheighted_IMDB', 'Adventure']])
-                        list_1 = array1.tolist()
-                        list_2 = array2.tolist()
-                        flat_list1 = list(np.concatenate(list_1).flat)
-                        flat_list2 = list(np.concatenate(list_2).flat)
-                        d = {'Distance': flat_list1,'index': flat_list2}
-                        df12 = pd.DataFrame(d)
-                        dfnl_df12 = pd.merge(condition_gi_nn, df12, how='inner', on=["index", "index"])
-                        final = dfnl_df12.sort_values(by = 'Distance').head(3)
-                        rec1 = final['primaryTitle'].values[0]
-                        url = f"https://www.omdbapi.com/?t={rec1}&apikey=38187759"
-                        re = requests.get(url)
-                        re = re.json()
-                        st.image(re['Poster'], width=125)
                         
-                            with inner_cols[1]:
-                                st.subheader(re['Title'])
-                                st.write (re['Plot'])
-                                st.text(f"Rating: {re['imdbRating']}")
-                            
-                    inner_cols = st.columns([1,2])
-                    with inner_cols[0]:
-                        st.image(re['Poster'], width=125)
-                    with inner_cols[1]:
-                        st.subheader(re['Title'])
-                        st.write (re['Plot'])
-                        st.text(f"Rating: {re['imdbRating']}")
-                            
-                    inner_cols = st.columns([1,2])
-                    with inner_cols[0]:
-                        st.image(re['Poster'], width=125)
-                    with inner_cols[1]:
-                        st.subheader(re['Title'])
-                        st.write (re['Plot'])
-                        st.text(f"Rating: {re['imdbRating']}")
+                        with inner_cols[0]:
+                            st.image(re['Poster'], width=125)
+                        
+                        with inner_cols[1]:
+                            st.subheader(re['Title'])
+                            st.write (re['Plot'])
+                            st.text(f"Rating: {re['imdbRating']}")
+                        
+                        inner_cols = st.columns([1,2])
+                        with inner_cols[0]:
+                            st.image(re['Poster'], width=125)
+                        with inner_cols[1]:
+                            st.subheader(re['Title'])
+                            st.write (re['Plot'])
+                            st.text(f"Rating: {re['imdbRating']}")
+                        
+                        inner_cols = st.columns([1,2])
+                        with inner_cols[0]:
+                            st.image(re['Poster'], width=125)
+                        with inner_cols[1]:
+                            st.subheader(re['Title'])
+                            st.write (re['Plot'])
+                            st.text(f"Rating: {re['imdbRating']}")
 
             except:
                 title = False
@@ -167,3 +168,36 @@ with tab3:
 #         st.video("https://www.youtube.com/watch?v=tGpTpVyI_OQ")
 #     with col8:
 #         st.video("https://www.youtube.com/watch?v=8hP9D6kZseM")
+
+
+
+    
+    
+    
+#     def rec(name, model):
+    
+#         test = df_inovmovie_n.loc[df_inovmovie_n['primaryTitle'].isin([name]), recommendation_columns]
+#         # st.table(test)
+
+#         array1, array2 = model.kneighbors(test)
+#         # st.write(array)
+
+#         # array1, array2 = model.kneighbors(df_inovmovie_n.loc[df_inovmovie_n['primaryTitle'].isin(name1), ['startYear', 'wheighted_IMDB',
+#         #        'Action', 'Adult', 'Adventure', 'Animation',
+#         #        'Biography', 'Comedy', 'Crime', 'Documentary', 'Drama', 'Family',
+#         #        'Fantasy', 'Film-Noir', 'Game-Show', 'History', 'Horror', 'Music',
+#         #        'Musical', 'Mystery', 'News', 'Reality-TV', 'Romance', 'Sci-Fi',
+#         #        'Short', 'Sport', 'Talk-Show', 'Thriller', 'War', 'Western']])
+
+#         list_1 = array1.tolist()
+#         list_2 = array2.tolist()
+
+#         flat_list1 = list(np.concatenate(list_1).flat)
+#         flat_list2 = list(np.concatenate(list_2).flat)
+
+#         d = {'Distance': flat_list1,'index': flat_list2}
+#         df12 = pd.DataFrame(d)
+
+#         dfnl_df12 = pd.merge(df_inovmovie_nf, df12, how='inner', on=["index", "index"])
+#         # dfnl_df12.sort_values(by = 'Distance').head(5)
+#         return dfnl_df12.sort_values(by = 'Distance').iloc[1:4, 'primaryTitle'] #head(5))

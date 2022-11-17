@@ -36,43 +36,45 @@ with tab1:
     
     st.header("Inov Movie")
     ##Remove the movie that is to be recomended from the list
-    name = ('Pulp Fiction')
+    name = 'Pulp Fiction'
 
     df_inovmovie_nf = df_inovmovie_n[df_inovmovie_n['primaryTitle'].str.contains(name) == False]
     # condition_gi_nn = condition_gi.loc[condition_gi['primaryTitle'] != name]
 
-    name1 = ['Pulp Fiction']
+    # name1 = ['Pulp Fiction']
 
     X1 = df_inovmovie_n[recommendation_columns]
-
-
+    
     model = NearestNeighbors(n_neighbors=5).fit(X1)
     
-    test = df_inovmovie_n.loc[df_inovmovie_n['primaryTitle'].isin(name1), recommendation_columns]
-    st.table(test)
+    def rec(name, model):
     
-    array = model.kneighbors(test)
-    st.write(array)
+        test = df_inovmovie_n.loc[df_inovmovie_n['primaryTitle'].isin([name]), recommendation_columns]
+        # st.table(test)
 
-    # array1, array2 = model.kneighbors(df_inovmovie_n.loc[df_inovmovie_n['primaryTitle'].isin(name1), ['startYear', 'wheighted_IMDB',
-    #        'Action', 'Adult', 'Adventure', 'Animation',
-    #        'Biography', 'Comedy', 'Crime', 'Documentary', 'Drama', 'Family',
-    #        'Fantasy', 'Film-Noir', 'Game-Show', 'History', 'Horror', 'Music',
-    #        'Musical', 'Mystery', 'News', 'Reality-TV', 'Romance', 'Sci-Fi',
-    #        'Short', 'Sport', 'Talk-Show', 'Thriller', 'War', 'Western']])
+        array1, array2 = model.kneighbors(test)
+        # st.write(array)
 
-    list_1 = array1.tolist()
-    list_2 = array2.tolist()
+        # array1, array2 = model.kneighbors(df_inovmovie_n.loc[df_inovmovie_n['primaryTitle'].isin(name1), ['startYear', 'wheighted_IMDB',
+        #        'Action', 'Adult', 'Adventure', 'Animation',
+        #        'Biography', 'Comedy', 'Crime', 'Documentary', 'Drama', 'Family',
+        #        'Fantasy', 'Film-Noir', 'Game-Show', 'History', 'Horror', 'Music',
+        #        'Musical', 'Mystery', 'News', 'Reality-TV', 'Romance', 'Sci-Fi',
+        #        'Short', 'Sport', 'Talk-Show', 'Thriller', 'War', 'Western']])
 
-    flat_list1 = list(np.concatenate(list_1).flat)
-    flat_list2 = list(np.concatenate(list_2).flat)
+        list_1 = array1.tolist()
+        list_2 = array2.tolist()
 
-    d = {'Distance': flat_list1,'index': flat_list2}
-    df12 = pd.DataFrame(d)
-    df12
+        flat_list1 = list(np.concatenate(list_1).flat)
+        flat_list2 = list(np.concatenate(list_2).flat)
 
-    dfnl_df12 = pd.merge(df_inovmovie_nf, df12, how='inner', on=["index", "index"])
-    dfnl_df12.sort_values(by = 'Distance').head(5)
+        d = {'Distance': flat_list1,'index': flat_list2}
+        df12 = pd.DataFrame(d)
+
+        dfnl_df12 = pd.merge(df_inovmovie_nf, df12, how='inner', on=["index", "index"])
+        # dfnl_df12.sort_values(by = 'Distance').head(5)
+        return dfnl_df12.sort_values(by = 'Distance').iloc[1:4, 'primaryTitle'] #head(5))
+
     # title_rec = list(dfnl_df12_sort['primaryTitle'])
     # title_rec1 = title_rec[0]
     # title_rec1 = title_rec[1]

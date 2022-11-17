@@ -23,8 +23,8 @@ from streamlit_option_menu import option_menu
 
 ###Import Data
 #reviews_wc = pd.read_pickle("pickles/review_final-wc_p.pkl")
-movies = pd.read_pickle("C:/Users/luisa/OneDrive/Documentos/GitHub/Project3/condition_gi.pickle")
-movies.head()
+movies = pd.read_pickle("C:\\Users\\frans\\Documents\\GitHub\\Fork-P3\\pickles\\condition_gi.pickle")
+
 
 
 ### Define columns:
@@ -35,7 +35,7 @@ tab1, tab2, tab3 = st.tabs(["Inov Movie", "Recomendations", "Top Movies"])
 with tab1:
     
     st.header("Inov Movie")
-   #st.image(image4, width=1000) 
+    st.table(movies.head(10))
 
     
 with tab2:    

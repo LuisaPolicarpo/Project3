@@ -30,9 +30,15 @@ Project3_Streamlit_app - Code for the streamlit application.
 - TOP movies -> wordlcloud -> rotten
 
 
-### Application 
+### Application
+
+Before running streamlit:
+pip install streamlit-nested-layout
+pip install streamlit_option_menu
+
 - Movie recommendation site 
-    - based: movie name, rating, actor, director. 
+    - input: movie name,
+    - based on start year, title type, weighted average, genre. 
 
 Shared Drive: https://drive.google.com/drive/folders/1j9mXgB-AGK_PIAttrY499RqLLPrhPCIN?usp=sharing
 

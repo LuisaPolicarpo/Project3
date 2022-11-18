@@ -60,8 +60,24 @@ def rec(name, model):
         
         return dfnl_df12.sort_values(by = 'Distance').iloc[:4]['primaryTitle']
 
-### STREAMLIT CODE
-st.set_page_config(page_title="Inov Movie", page_icon="🎥", layout="wide", menu_items=None)
+# ### STREAMLIT CODE
+st.set_page_config(page_title="InovMovie", page_icon="🎥", layout="wide", menu_items=None)
+# import base64
+# def add_bg_from_local(image_file):
+#     with open(image_file, "rb") as image_file:
+#         encoded_string = base64.b64encode(image_file.read())
+#     st.markdown(
+#     f"""
+#     <style>
+#     .stApp {{
+#         background-image: url(data:image/{"jpg"};base64,{encoded_string.decode()});
+#         background-size: cover
+#     }}
+#     </style>
+#     """,
+#     unsafe_allow_html=True
+#     )
+# add_bg_from_local('OneDrive/Documentos/GitHub/Project3/Images/Picture1.jpg')
 
 tab1, tab2 = st.tabs(["Recommendations", "Suggestions"])
 
@@ -152,46 +168,35 @@ with tab2:
     
     if selected == "Drama":
         col, col1, col2 = st.columns(3)
-
+        
         with col:
-             st.subheader('The Shawshank Redemption')
-        # st.markdown('**_Gender_**: Drama')
-             st.markdown('**_Year_**: 1994')
-# st.text('Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.')
-             st.video("https://www.youtube.com/watch?v=6hB3S9bIaco")
-
+            st.subheader('The Shawshank Redemption')
+            st.markdown('**_Year_**: 1994')
+            st.video("https://www.youtube.com/watch?v=6hB3S9bIaco")
         with col1:
-             st.subheader('The Godfather')
-        # st.markdown('**_Gender_**: Crime')
-             st.markdown('**_Year_**: 1972')
-# st.text('The aging patriarch of an organized crime dynasty in postwar New York City transfers control of his clandestine empire to his reluctant youngest son')
-             st.video("https://www.youtube.com/watch?v=sY1S34973zA")
+            st.subheader('The Godfather')
+            st.markdown('**_Year_**: 1972')
+            st.video("https://www.youtube.com/watch?v=sY1S34973zA")
         with col2:
-             st.subheader('The Dark Knight')
-        # st.markdown('**_Gender_**: Action, Crime, Drama')
-             st.markdown('**_Year_**: 2008')
-             st.video("https://www.youtube.com/watch?v=EXeTwQWrcwY")
+            st.subheader('The Dark Knight')
+            st.markdown('**_Year_**: 2008')
+            st.video("https://www.youtube.com/watch?v=EXeTwQWrcwY")
     
     if selected == "Romance":
         col3, col4, col5 = st.columns(3)
 
         with col3:
             st.subheader('Forrest Gump')
-        # st.markdown('**_Gender_**: Drama')
             st.markdown('**_Year_**: 1994')
-# st.text('Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.')
             st.video("https://www.youtube.com/watch?v=bLvqoHBptjg")
 
         with col4:
             st.subheader('La vita è bella')
-        # st.markdown('**_Gender_**: Crime')
             st.markdown('**_Year_**: 1997')
-# st.text('The aging patriarch of an organized crime dynasty in postwar New York City transfers control of his clandestine empire to his reluctant youngest son')
             st.video("https://www.youtube.com/watch?v=pAYEQP8gx3w")
     
         with col5:
             st.subheader('Casablanca')
-        # st.markdown('**_Gender_**: Action, Crime, Drama')
             st.markdown('**_Year_**: 1942')
             st.video("https://www.youtube.com/watch?v=h6arup5MoUo")
             
@@ -201,20 +206,15 @@ with tab2:
 
         with col6:
             st.subheader("Schindler's List")
-        # st.markdown('**_Gender_**: Drama')
             st.markdown('**_Year_**: 1993')
-# st.text('Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.')
             st.video("https://www.youtube.com/watch?v=gG22XNhtnoY&t=22s")
 
         with col7:
             st.subheader('Goodfellas')
-        # st.markdown('**_Gender_**: Crime')
             st.markdown('**_Year_**: 1990')
-# st.text('The aging patriarch of an organized crime dynasty in postwar New York City transfers control of his clandestine empire to his reluctant youngest son')
             st.video("https://www.youtube.com/watch?v=qo5jJpHtI1Y")
     
         with col8:
             st.subheader('The Intouchables')
-        # st.markdown('**_Gender_**: Action, Crime, Drama')
             st.markdown('**_Year_**: 2011')
             st.video("https://www.youtube.com/watch?v=34WIbmXkewU")

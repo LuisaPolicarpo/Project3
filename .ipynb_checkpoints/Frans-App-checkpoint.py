@@ -6,27 +6,60 @@ import re
 import seaborn as sns
 import matplotlib.pyplot as plt
 import matplotlib.ticker as mtick
+<<<<<<< Updated upstream
+=======
+import re
+import nltk
+import spacy
+from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize
+from nltk.tokenize import sent_tokenize
+from nltk.stem import SnowballStemmer
+from sklearn import datasets
+from sklearn.model_selection import train_test_split
+
+from sklearn.decomposition import PCA
+from sklearn.svm import SVC
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.ensemble import RandomForestClassifier
+
+from sklearn.metrics import accuracy_score
+>>>>>>> Stashed changes
 from string import punctuation
 import pickle
 from PIL import Image
 import requests
 import streamlit_nested_layout
 from streamlit_option_menu import option_menu
-
+from sklearn.neighbors import NearestNeighbors
+# server.maxMessageSize
 ###Import Data
 #reviews_wc = pd.read_pickle("pickles/review_final-wc_p.pkl")
+<<<<<<< Updated upstream
 movies = pd.read_pickle("C:\\Users\\frans\\Documents\\GitHub\\Fork-P3\\pickles\\condition_gi.pickle")
 movies.drop(['tconst','\\N'], axis = 1, inplace = True)
 
-### Define columns:
+=======
 st.set_page_config(page_title="Inov Movie", page_icon="🎥", layout="wide", menu_items=None)
+movies = pd.read_pickle("C:/Users/luisa/OneDrive/Documentos/GitHub/Project3/condition_gi.pickle")
+# st.table(movies.head())
+movies.drop(['tconst','\\N'], axis = 1, inplace = True)
+st.table(movies.head())
+# input 
+>>>>>>> Stashed changes
+### Define columns:
 
-tab1, tab2, tab3 = st.tabs(["Inov Movie", "Recomendations", "Top Movies"])
+tab2, tab3 = st.tabs([ "Recomendations", "Top Movies"])
 
-with tab1:
+# with tab1:
     
+<<<<<<< Updated upstream
     st.header("Inov Movie")
     st.table(movies.head(10))
+=======
+#     st.header("Inov Movie")
+#    #st.image(image4, width=1000) 
+>>>>>>> Stashed changes
 
     
 with tab2:    
@@ -146,3 +179,102 @@ with tab3:
 #         st.video("https://www.youtube.com/watch?v=tGpTpVyI_OQ")
 #     with col8:
 #         st.video("https://www.youtube.com/watch?v=8hP9D6kZseM")
+
+
+import streamlit as st
+import pandas as pd
+import numpy as np  
+import re
+import seaborn as sns
+import matplotlib.pyplot as plt
+import matplotlib.ticker as mtick
+from string import punctuation
+import pickle
+from PIL import Image
+import requests
+import streamlit_nested_layout
+from streamlit_option_menu import option_menu
+
+from sklearn.neighbors import NearestNeighbors
+
+###Import Data
+df_inovmovie = pd.read_pickle("C:/Users/luisa/OneDrive/Documentos/GitHub/Project3/condition_gi.pickle")
+df_inovmovie = df_inovmovie.drop(['tconst','\\N'], axis = 1)
+df_inovmovie_n = df_inovmovie.dropna(subset=['wheighted_IMDB'])
+
+X  = ['startYear', 'wheighted_IMDB',
+           'Action', 'Adult', 'Adventure', 'Animation',
+           'Biography', 'Comedy', 'Crime', 'Documentary', 'Drama', 'Family',
+           'Fantasy', 'Film-Noir', 'Game-Show', 'History', 'Horror', 'Music',
+           'Musical', 'Mystery', 'News', 'Reality-TV', 'Romance', 'Sci-Fi',
+           'Short', 'Sport', 'Talk-Show', 'Thriller', 'War', 'Western']
+
+### Define columns:
+
+    
+
+#     name = 'Pulp Fiction'
+
+#     df_inovmovie_nf = df_inovmovie_n[df_inovmovie_n['primaryTitle'].str.contains(name) == False]
+#     # condition_gi_nn = condition_gi.loc[condition_gi['primaryTitle'] != name]
+
+#     # name1 = ['Pulp Fiction']
+
+#     X1 = df_inovmovie_n[recommendation_columns]
+    
+model = NearestNeighbors(n_neighbors=5).fit(X).reshape(1, -1)
+    
+user_input = st.text_input("Tell us a movie so we can show you some recommendations: ")
+
+input_results = movies[movies['primaryTitle'].str.contains(user_input, na = False)]['primaryTitle']
+    
+options = st.multiselect('Please choose one film from below:', input_results)
+
+clean_option = str(options)
+cleaner_option = clean_option[2:-2]    
+if st.button('Submit'):
+    movie = movies.loc[movies.primaryTitle == cleaner_option]
+    movie_index = movie.index.astype(int)
+    favorite = list(X.iloc[movie_index[0]])
+
+    prediction = distanceKNN.kneighbors([favorite])
+    results = prediction[1].tolist()
+    results = results[0]
+    results_n = movies.iloc[results]
+    results_a = results_n[["primaryTitle","director"]]
+    results_a.rename(columns={"primaryTitle": "Title:", "director" : "Directed by:"}, inplace = True)
+
+    st.header("Thank you very much! Please check below what we have for you:")
+    st.write(results_a[1:5])    
+    
+    
+    
+    
+    
+#     def rec(name, model):
+    
+#         test = df_inovmovie_n.loc[df_inovmovie_n['primaryTitle'].isin([name]), recommendation_columns]
+#         # st.table(test)
+
+#         array1, array2 = model.kneighbors(test)
+#         # st.write(array)
+
+#         # array1, array2 = model.kneighbors(df_inovmovie_n.loc[df_inovmovie_n['primaryTitle'].isin(name1), ['startYear', 'wheighted_IMDB',
+#         #        'Action', 'Adult', 'Adventure', 'Animation',
+#         #        'Biography', 'Comedy', 'Crime', 'Documentary', 'Drama', 'Family',
+#         #        'Fantasy', 'Film-Noir', 'Game-Show', 'History', 'Horror', 'Music',
+#         #        'Musical', 'Mystery', 'News', 'Reality-TV', 'Romance', 'Sci-Fi',
+#         #        'Short', 'Sport', 'Talk-Show', 'Thriller', 'War', 'Western']])
+
+#         list_1 = array1.tolist()
+#         list_2 = array2.tolist()
+
+#         flat_list1 = list(np.concatenate(list_1).flat)
+#         flat_list2 = list(np.concatenate(list_2).flat)
+
+#         d = {'Distance': flat_list1,'index': flat_list2}
+#         df12 = pd.DataFrame(d)
+
+#         dfnl_df12 = pd.merge(df_inovmovie_nf, df12, how='inner', on=["index", "index"])
+#         # dfnl_df12.sort_values(by = 'Distance').head(5)
+#         return dfnl_df12.sort_values(by = 'Distance').iloc[1:4, 'primaryTitle'] #head(5))

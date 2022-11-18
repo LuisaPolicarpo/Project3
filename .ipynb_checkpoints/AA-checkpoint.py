@@ -17,7 +17,7 @@ from sklearn.neighbors import NearestNeighbors
 
 ##GLOBAL VARIABLES
 ###Import Data
-df_inovmovie = pd.read_pickle("C:\\Users\\frans\\Documents\\GitHub\\Fork-P3\\pickles\\condition_gi.pickle")
+df_inovmovie = pd.read_pickle("C:/Users/luisa/OneDrive/Documentos/GitHub/Project3/condition_gi.pickle")
 
 ###Columns to recommend
 recommendation_columns = ['startYear', 'wheighted_IMDB',
@@ -70,7 +70,12 @@ tab1, tab2 = st.tabs(["Recomendations", "Top Movies"])
 with tab1:
         outer_cols = st.columns([2,0.5,2])
         st.header("Inov Movie")
-        title = st.selectbox('Select a movie', list(df_inovmovie_n['primaryTitle']))
+<<<<<<< HEAD:Project3_Streamlit_final.py
+        title = st.selectbox('Select a movie', df_inovmovie['primaryTitle'])
+=======
+        title = st.text_input('Type the title and press Enter')
+ 
+>>>>>>> 4e01df327c6f282f1c0e85aaaa2f3f5dd95951e6:.ipynb_checkpoints/AA-checkpoint.py
 
 
         with outer_cols[0]:
@@ -111,6 +116,9 @@ with tab1:
                         
                         inner_cols = st.columns([1,2])
                         with inner_cols[0]:
+                                url = f"https://www.omdbapi.com/?t={title_rec[1]}&apikey=38187759"
+                                re = requests.get(url)
+                                re = re.json()
                                 st.image(re['Poster'], width=125)
                         with inner_cols[1]:
                                 st.subheader(re['Title'])
@@ -119,89 +127,17 @@ with tab1:
                                 
                         inner_cols = st.columns([1,2])
                         with inner_cols[0]:
+                                url = f"https://www.omdbapi.com/?t={title_rec[2]}&apikey=38187759"
+                                re = requests.get(url)
+                                re = re.json()
                                 st.image(re['Poster'], width=125)
                         with inner_cols[1]:
                                 st.subheader(re['Title'])
                                 st.write (re['Plot'])
                                 st.text(f"Rating: {re['imdbRating']}")
     
-with tab2:    
- outer_cols = st.columns([2,0.5,2])
- 
+with tab2:
 
-### Left side of screen
-with outer_cols[0]:
-    st.markdown('## Movie')
-    title = st.text_input('Type the title and press Enter')
-
-    if title:
-            try: 
-                url = f"https://www.omdbapi.com/?t={title}&apikey=38187759"
-                re = requests.get(url)
-                re = re.json()
-                inner_cols = st.columns([1,2])
-                with inner_cols[0]:
-                    st.image(re['Poster'])
-
-                with inner_cols[1]:
-                    st.header(re['Title'])
-                    st.caption(f"Gender:{re['Genre']} Year: {re['Year']} ")
-                    st.write (re['Plot'])
-                    st.text(f"Rating: {re['imdbRating']}")
-                    st.progress(float(re['imdbRating'])/10)
-
-                        ### Right side of screen    
-                    with outer_cols[0]:
-                        st.markdown('')
-                        
-                    with outer_cols[2]:
-                        st.markdown('## Recommendations')
-                        inner_cols = st.columns([1,2])
-                   
-                        with inner_cols[0]:
-                              #Recommednation engine
-                            with inner_cols[1]:
-                                st.subheader(re['Title'])
-                                st.write (re['Plot'])
-                                st.text(f"Rating: {re['imdbRating']}")
-                            
-                    inner_cols = st.columns([1,2])
-                    with inner_cols[0]:
-                        st.image(re['Poster'], width=125)
-                    with inner_cols[1]:
-                        st.subheader(re['Title'])
-                        st.write (re['Plot'])
-                        st.text(f"Rating: {re['imdbRating']}")
-                            
-                    inner_cols = st.columns([1,2])
-                    with inner_cols[0]:
-                        st.image(re['Poster'], width=125)
-                    with inner_cols[1]:
-                        st.subheader(re['Title'])
-                        st.write (re['Plot'])
-                        st.text(f"Rating: {re['imdbRating']}")
-
-            except:
-                title = False
-                st.markdown('''We currently don't have detailed information on this movie
-                drop us an email and our scouting team will look into it and will send you our review''')
-                contact_form = """
-                <form action="https://formsubmit.co/inovmovie@gmail.com" method="POST">
-                <input type="text" name="Suggestion" placeholder="Movie suggestion" required>
-                <input type="text name="Name" placeholder="Your name" required>
-                <button type="submit">Send</button>
-                </form>
-                """
-                st.markdown (contact_form, unsafe_allow_html=True)
-with tab3:
-   #  selected = option_menu(
-   #  menu_title="In case of lack of ideias", 
-   #  options = ["Drama", "Romance", "Comedy"],
-   #  orientation = "horizontal",)
-   # # st.header("Our main Sucess")
-   #  # tab1, tab2 = st.tabs(["📈 Recomendation", "🗃 Top movies"])
-   #  if selected == "Drama":
-   #      tab1.subheader("A tab with a chart")
     col, col1, col2 = st.columns(3)
 
 

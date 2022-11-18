@@ -30,11 +30,23 @@ Project3_Streamlit_app - Code for the streamlit application.
 - TOP movies -> wordlcloud -> rotten
 
 
-### Application 
-- Movie recommendation site 
-    - based: movie name, rating, actor, director. 
+### Application
 
-Shared Drive: https://drive.google.com/drive/folders/1j9mXgB-AGK_PIAttrY499RqLLPrhPCIN?usp=sharing
+Before running streamlit:
+
+pip install streamlit-nested-layout
+
+pip install streamlit_option_menu
+
+pip install threadpoolctl==3.1.0
+
+
+## Movie Recomendation system
+
+- Movie recommendation site 
+    - input: movie name,
+    - based on start year, title type, weighted average, genre. 
+
 
 Documentation explaining each column and each table: https://www.imdb.com/interfaces/
 

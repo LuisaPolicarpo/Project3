@@ -19,7 +19,6 @@ from sklearn.neighbors import NearestNeighbors
 ###Import Data
 df_inovmovie = pd.read_pickle("C:/Users/luisa/OneDrive/Documentos/GitHub/Project3/condition_gi.pickle")
 
-
 ###Columns to recommend
 recommendation_columns = ['startYear', 'wheighted_IMDB',
            'Action', 'Adult', 'Adventure', 'Animation',
@@ -64,7 +63,7 @@ def rec(name, model):
 ### STREAMLIT CODE
 st.set_page_config(page_title="Inov Movie", page_icon="🎥", layout="wide", menu_items=None)
 
-tab1, tab2 = st.tabs(["Recomendations", "Suggestions"])
+tab1, tab2 = st.tabs(["Recommendations", "Suggestions"])
 
 with tab1:
     outer_cols = st.columns([2,0.5,2])
@@ -148,7 +147,7 @@ with tab2:
     
     selected = option_menu(
     menu_title=None, 
-    options = ["Drama", "Romance", "Comedy"],
+    options = ["Drama", "Romance", "Biography"],
     orientation = "horizontal",)
     
     if selected == "Drama":
@@ -191,31 +190,31 @@ with tab2:
             st.video("https://www.youtube.com/watch?v=pAYEQP8gx3w")
     
         with col5:
-            st.subheader('It is a Wonderful Life')
+            st.subheader('Casablanca')
         # st.markdown('**_Gender_**: Action, Crime, Drama')
-            st.markdown('**_Year_**: 1946')
-            st.video("https://www.youtube.com/watch?v=iLR3gZrU2Xo")
+            st.markdown('**_Year_**: 1942')
+            st.video("https://www.youtube.com/watch?v=h6arup5MoUo")
             
 
     if selected == "Biography":
         col6, col7, col8 = st.columns(3)
 
         with col6:
-            st.subheader('Schindlers List')
+            st.subheader("Schindler's List")
         # st.markdown('**_Gender_**: Drama')
-            st.markdown('**_Year_**: 1994')
+            st.markdown('**_Year_**: 1993')
 # st.text('Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.')
             st.video("https://www.youtube.com/watch?v=gG22XNhtnoY&t=22s")
 
         with col7:
-            st.subheader('La vita è bella')
+            st.subheader('Goodfellas')
         # st.markdown('**_Gender_**: Crime')
-            st.markdown('**_Year_**: 1997')
+            st.markdown('**_Year_**: 1990')
 # st.text('The aging patriarch of an organized crime dynasty in postwar New York City transfers control of his clandestine empire to his reluctant youngest son')
-            st.video("https://www.youtube.com/watch?v=pAYEQP8gx3w")
+            st.video("https://www.youtube.com/watch?v=qo5jJpHtI1Y")
     
         with col8:
-            st.subheader('It is a Wonderful Life')
+            st.subheader('The Intouchables')
         # st.markdown('**_Gender_**: Action, Crime, Drama')
-            st.markdown('**_Year_**: 1946')
-            st.video("https://www.youtube.com/watch?v=iLR3gZrU2Xo")
+            st.markdown('**_Year_**: 2011')
+            st.video("https://www.youtube.com/watch?v=34WIbmXkewU")

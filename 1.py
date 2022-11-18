@@ -19,6 +19,7 @@ from sklearn.neighbors import NearestNeighbors
 ###Import Data
 df_inovmovie = pd.read_pickle("C:/Users/luisa/OneDrive/Documentos/GitHub/Project3/condition_gi.pickle")
 
+
 ###Columns to recommend
 recommendation_columns = ['startYear', 'wheighted_IMDB',
            'Action', 'Adult', 'Adventure', 'Animation',
@@ -196,15 +197,15 @@ with tab2:
             st.video("https://www.youtube.com/watch?v=iLR3gZrU2Xo")
             
 
-    if selected == "Comedy":
+    if selected == "Biography":
         col6, col7, col8 = st.columns(3)
 
         with col6:
-            st.subheader('Forrest Gump')
+            st.subheader('Schindlers List')
         # st.markdown('**_Gender_**: Drama')
             st.markdown('**_Year_**: 1994')
 # st.text('Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.')
-            st.video("https://www.youtube.com/watch?v=bLvqoHBptjg")
+            st.video("https://www.youtube.com/watch?v=gG22XNhtnoY&t=22s")
 
         with col7:
             st.subheader('La vita è bella')

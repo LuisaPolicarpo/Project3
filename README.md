@@ -47,7 +47,6 @@ pip install threadpoolctl==3.1.0
     - input: movie name,
     - based on start year, title type, weighted average, genre. 
 
-Shared Drive: https://drive.google.com/drive/folders/1j9mXgB-AGK_PIAttrY499RqLLPrhPCIN?usp=sharing
 
 Documentation explaining each column and each table: https://www.imdb.com/interfaces/
 

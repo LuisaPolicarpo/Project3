@@ -90,7 +90,7 @@ tab1, tab2 = st.tabs(["Recomendations", "Top Movies"])
 with tab1:
         outer_cols = st.columns([2,0.5,2])
         st.header("Inov Movie")
-        title = st.selectbox('Select a movie', list(df_inovmovie_n['primaryTitle']))
+        title = st.selectbox('Select a movie', df_inovmovie['primaryTitle'])
 
 
         with outer_cols[0]:

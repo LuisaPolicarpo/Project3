@@ -70,8 +70,12 @@ tab1, tab2 = st.tabs(["Recomendations", "Top Movies"])
 with tab1:
         outer_cols = st.columns([2,0.5,2])
         st.header("Inov Movie")
+<<<<<<< HEAD:Project3_Streamlit_final.py
+        title = st.selectbox('Select a movie', df_inovmovie['primaryTitle'])
+=======
         title = st.text_input('Type the title and press Enter')
  
+>>>>>>> 4e01df327c6f282f1c0e85aaaa2f3f5dd95951e6:.ipynb_checkpoints/AA-checkpoint.py
 
 
         with outer_cols[0]:

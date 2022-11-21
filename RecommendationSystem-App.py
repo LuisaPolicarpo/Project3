@@ -18,7 +18,7 @@ from sklearn.neighbors import NearestNeighbors
 
 ##GLOBAL VARIABLES
 ###Import Data
-df_inovmovie = pd.read_pickle("C:/Users/luisa/OneDrive/Documentos/GitHub/Project3/condition_gi.pickle")
+df_inovmovie = pd.read_pickle(r"C:\\Users\\frans\\Documents\\GitHub\\Fork-P3\\pickles\\condition_gi.pickle")
 
 ###Columns to recommend
 recommendation_columns = ['startYear', 'wheighted_IMDB',
@@ -109,6 +109,7 @@ with tab1:
                                 re = re.json()
                                 st.image(re['Poster'])
                             with inner_cols[1]:
+                                st.subheader(re['Title'])
                                 st.write (re['Plot'])
                                 st.text(f"Rating: {re['imdbRating']}")
                             
@@ -119,6 +120,7 @@ with tab1:
                                 re = re.json()
                                 st.image(re['Poster'])
                             with inner_cols[1]:
+                                st.subheader(re['Title'])
                                 st.write (re['Plot'])
                                 st.text(f"Rating: {re['imdbRating']}")
                             
@@ -129,6 +131,7 @@ with tab1:
                                 re = re.json()
                                 st.image(re['Poster'])
                             with inner_cols[1]:
+                                st.subheader(re['Title'])
                                 st.write (re['Plot'])
                                 st.text(f"Rating: {re['imdbRating']}")
 

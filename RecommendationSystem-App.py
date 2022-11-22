@@ -18,7 +18,7 @@ from sklearn.neighbors import NearestNeighbors
 
 ##GLOBAL VARIABLES
 ###Import Data
-df_inovmovie = pd.read_pickle('C:\Users\Marta\Documents\GitHub\Project3')
+df_inovmovie = pd.read_pickle('C:/Users/Marta/Documents/GitHub/Project3/condition_gi.pickle')
 #C:/Users/luisa/OneDrive/Documentos/GitHub/Project3/condition_gi.pickle
 
 ###Columns to recommend

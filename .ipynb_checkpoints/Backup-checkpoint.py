@@ -28,7 +28,7 @@ recommendation_columns = ['startYear', 'wheighted_IMDB',
            'Biography', 'Comedy', 'Crime', 'Documentary', 'Drama', 'Family',
            'Fantasy', 'Film-Noir', 'Game-Show', 'History', 'Horror', 'Music',
            'Musical', 'Mystery', 'News', 'Reality-TV', 'Romance', 'Sci-Fi',
-           'Short', 'Sport', 'Talk-Show', 'Thriller', 'War', 'Western']
+           'Short', 'Sport', 'Talk-Show', 'Thriller', 'War', 'Western']]
 
 ##PRE-PROCESSING
 ###clean data

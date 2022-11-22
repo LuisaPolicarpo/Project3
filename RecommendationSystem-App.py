@@ -189,7 +189,7 @@ with tab2:
             st.subheader('Casablanca')
             st.markdown('**_Year_**: 1942')
             st.video("https://www.youtube.com/watch?v=h6arup5MoUo")
-            
+
 
     if selected == "Biography":
         col6, col7, col8 = st.columns(3)

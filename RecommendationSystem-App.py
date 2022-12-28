@@ -18,8 +18,7 @@ from sklearn.neighbors import NearestNeighbors
 
 ##GLOBAL VARIABLES
 ###Import Data
-#df_inovmovie = pd.read_pickle(r"C:\\Users\\frans\\Documents\\GitHub\\Fork-P3\\pickles\\condition_gi.pickle")
-df_inovmovie = pd.read_csv(r"C:\Users\frans\Documents\GitHub\Fork-P3\final-MRE.csv")
+df_inovmovie = pd.read_pickle(r"C:\\Users\\frans\\Documents\\GitHub\\Fork-P3\\pickles\\condition_gi.pickle")
 
 ###Columns to recommend
 recommendation_columns = ['startYear', 'wheighted_IMDB',
